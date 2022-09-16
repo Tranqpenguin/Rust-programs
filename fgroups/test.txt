@@ -1,1 +1,7 @@
-this is a test to see if this program works.
+A Ron
+A Poppy
+B Bill
+A Dubya
+B Barry
+A Orange
+B Joe
