@@ -1,1 +1,1 @@
-/home/andrequiroa/Desktop-Home/brightness/target/debug/brightness: /home/andrequiroa/Desktop-Home/brightness/src/main.rs
+/home/andrequiroa/Rust-programs/brightness/target/debug/brightness: /home/andrequiroa/Rust-programs/brightness/src/main.rs
