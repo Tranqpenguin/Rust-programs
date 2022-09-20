@@ -9,9 +9,9 @@ fn main() {
     let img = GrayImage::read(input.as_deref()).unwrap();
     let mut denom = img.denominator as u32;
     for pixel in img.pixels {
-        denom = denom + denom;//(u32::from(pixel));
+        let a = pixel.value;
 
-
+        println!("{:?}",a);
     }
-    println!("{:?}",denom);
+
 }
