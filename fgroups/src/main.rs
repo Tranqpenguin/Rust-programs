@@ -1,4 +1,3 @@
-
 use std::io::{BufRead, BufReader};
 use std::fs::File;
 
@@ -20,3 +19,14 @@ pub fn main() {
     println!("{:?}", content);
 }
 
+/*
+let mut state = "somthing"
+
+for group in groups{
+    print!("{}", state);
+    for entry in group{
+        print!("{}", entry);
+    }
+    state = "somthing else";
+}
+ */

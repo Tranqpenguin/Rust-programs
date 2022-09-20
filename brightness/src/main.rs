@@ -17,17 +17,7 @@ fn main() {
     let avg = sum as f32 / counter as f32;
     println!("{:.3}",avg);
 
-    /*
-    let mut state = "somthing"
 
-    for group in groups{
-        print!("{}", state);
-        for entry in group{
-            print!("{}", entry);
-        }
-        state = "somthing else";
-    }
-     */
 
     
 
