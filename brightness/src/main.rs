@@ -3,7 +3,6 @@ use std::env;
 
 
 fn main() {
-    //let mut count = 1;
     let input = env::args().nth(1);
     assert!(env::args().len() == 2);
     let img = GrayImage::read(input.as_deref()).unwrap();
@@ -17,6 +16,18 @@ fn main() {
     }
     let avg = sum as f32 / counter as f32;
     println!("{:.3}",avg);
+
+    /*
+    let mut state = "somthing"
+
+    for group in groups{
+        print!("{}", state);
+        for entry in group{
+            print!("{}", entry);
+        }
+        state = "somthing else";
+    }
+     */
 
     
 
