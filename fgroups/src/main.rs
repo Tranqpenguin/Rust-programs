@@ -24,9 +24,9 @@ fn main() {
     let mut current_state = "";
     for names in fgroups_hashmap.values(){
         if names.len() >1{
-            print!("{}", current_state);
+            println!("{}", current_state);
             for name in names{
-                print!("{}", name.trim_start());
+                println!("{}", name.trim_start());
             }
         }
         current_state = "\n"
