@@ -32,5 +32,3 @@ fn main() {
         current_state = "\n"
     }
 }
-
-
