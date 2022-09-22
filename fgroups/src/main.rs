@@ -34,15 +34,3 @@ fn main() {
 }
 
 
-
-/*
-let mut state = "somthing"
-
-for group in groups{
-    print!("{}", state);
-    for entry in group{
-        print!("{}", entry);
-    }
-    state = "somthing else";
-}
- */
