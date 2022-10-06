@@ -6,9 +6,11 @@
       <sourceFolder url="file://$MODULE_DIR$/fgroups/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/pnmdata/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/testing/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/iii/array2/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/pnmdata/target" />
       <excludeFolder url="file://$MODULE_DIR$/fgroups/target" />
       <excludeFolder url="file://$MODULE_DIR$/testing/target" />
+      <excludeFolder url="file://$MODULE_DIR$/iii/array2/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
