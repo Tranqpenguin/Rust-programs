@@ -1,12 +1,8 @@
-use std::fs::File;
-use std::io;
-use std::io::{BufRead, Read};
-
 pub fn add(left: usize, right: usize) -> usize {
     left + right
 }
 
-struct array2{
+struct Array2{
     height: u32,
     width: u32,
 }
