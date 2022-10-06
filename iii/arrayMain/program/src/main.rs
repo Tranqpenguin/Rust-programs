@@ -16,11 +16,6 @@ pub fn main() {
             if c.is_whitespace() == false {
                 vec1.push(c);
             }
-            if c.is_whitespace() {
-                if c.is_whitespace() {
-                    vec1.push(c);
-                }
-            }
         }
     }
     println!("{:?}", vec1);
