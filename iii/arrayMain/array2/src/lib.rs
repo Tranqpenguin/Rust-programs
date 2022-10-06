@@ -2,9 +2,10 @@ pub fn add(left: usize, right: usize) -> usize {
     left + right
 }
 
-struct Array2{
-    height: u32,
-    width: u32,
+pub struct Array2D<T: Clone> {
+    array: Vec<T>,
+    num_rows: usize,
+    num_columns: usize,
 }
 
 pub fn iter_row_major(){
@@ -22,7 +23,6 @@ mod tests {
 
     #[test]
     fn it_works() {
-        array2();
         let result = add(2, 2);
         assert_eq!(result, 4);
     }
