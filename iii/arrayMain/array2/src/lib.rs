@@ -6,15 +6,17 @@ pub fn add(left: usize, right: usize) -> usize {
     left + right
 }
 
-pub fn array2(){
-    fn read_a_file() -> std::io::Result<Vec<u8>> {
-        let mut file = File::open("test_array2.txt")?;
+struct array2{
+    height: u32,
+    width: u32,
+}
 
-        let mut data = Vec::new();
-        file.read_to_end(&mut data)?;
-        println!("{:?}", data);
-        return Ok(data);
-    }
+pub fn iter_row_major(){
+
+}
+
+pub fn iter_row_column(){
+
 }
 
 
