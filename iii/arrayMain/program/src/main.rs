@@ -21,8 +21,12 @@ pub fn main() {
     }
 
     let mut suko = Array2::new_array2(9,9,vec1);
-    let bam = suko.get_mut(0,0);
-    let bb = suko.height();
-    println!("{:?}", bb);
+    //let mut lim = Array2::from_row_major(9,9,vec1);
+    let mut time = Array2::iter_col_major(&suko);
+    let mut ye = Array2::new_array2(9,9,&time);
+    //let bam = suko.get_mut(0,0);
+    println!(ye);
 
+
+    
 }
