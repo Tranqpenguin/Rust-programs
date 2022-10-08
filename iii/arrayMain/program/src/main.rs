@@ -7,15 +7,22 @@ fn ws(c:char) -> bool{
 }
 pub fn main() {
     let mut vec1 = Vec::new();
+    let mut length = 0;
     for line in io::stdin().lock().lines(){
         let mut line_split = line.as_ref().unwrap().splitn(1,|c:char|ws(c));
         let a = line_split.next().unwrap().to_string();
-        vec1.push(a);
+        let split: String = a;
+        for s in split.chars(){
+            if s != ' '{
+                length = length + 1 as usize;
+                vec1.push(s);
+            }
+        }
     }
-    let a = Array2{
-        array: vec1,
-        num_rows: 9 as usize,
-        num_columns: 9 as usize,
-    };
-    println!("{:?}", vec1);
+
+    let mut suko = Array2::new_array2(9,9,vec1);
+    let bam = suko.get_mut(0,0);
+    let bb = suko.height();
+    println!("{:?}", bb);
+
 }

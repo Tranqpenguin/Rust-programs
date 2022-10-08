@@ -1,98 +1,113 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+// `Array2` provides a fixed-size 2-dimensional array.
+// An error that can arise during the use of an [`Array2D`].
+//
+// [`Array2D`]: struct.Array2D.html
+// #[derive(Debug, Eq, PartialEq)]
+// pub enum Error {
+//     /// The indices (coordinates) were out of bounds.
+//     IndicesOutOfBounds(usize, usize),
+// }
 
+/// Elements contained must support `Clone`
+#[derive(Debug, Clone, Eq, PartialEq)]
 pub struct Array2<T: Clone> {
-    array: Vec<T>,
-    num_rows: usize,
-    num_columns: usize,
-}
-
-///TBD if useful
-pub enum Error {
-    /// The given indices were out of bounds.
-    IndexOutOfBounds(usize, usize),
+    width: usize,
+    height: usize,
+    data: Vec<T>,
 }
 
 impl<T: Clone> Array2<T> {
-
-
-    pub fn iter_row_major(&self)-> impl Iterator< Item = (usize, usize, &T)>{
-        self.values.iter().map_row_major();
-
-    }
-    ///this takes the vector<T> and checks if it matches the hight*width of array2
-    pub fn from_row_major(elements: &[T], num_rows: usize, num_columns: usize) -> Self {
-        let total_len = num_rows * num_columns;
-        if total_len != elements.len() {
-            panic!(
-                "The number of elements ({}) did not match the expected size ({})",
-                elements.len(),
-                total_len
-            );
-        }
-        values_column = (0..height);
+    /// Creates a new `Array2`.
+    ///
+    /// # Arguments
+    ///
+    /// * `width`: the width of the `Array2`.
+    /// * `height`: the height of the `Array2`.
+    /// * `val`: the value to fill every element with
+    pub fn new_array2(width: usize, height: usize, val: T) -> Self {
+        let data = vec![val; width * height];
         Array2 {
-            array: elements.to_vec(),
-            num_rows,
-            num_columns,
+            width,
+            height,
+            data,
         }
     }
 
-
-    pub fn from_column_major(elements: &[T], num_rows: usize, num_columns: usize) -> Self {
-        let total_len = num_rows * num_columns;
-        if total_len != elements.len() {
-            panic!(
-                "The number of elements ({}) did not match the expected size ({})",
-                elements.len(),
-                total_len
-            );
-        }
-        ///this makes a flatmap out of rows indecies going from 0....n, the it mapes the columns along side it as a pair.
-        /// vector of indexes, grab those index which makes a pattern
-        let indices_row_major =
-            (0..num_rows).flat_map(move |row| (0..num_columns).map(move |column| (row, column)));
-        let array = indices_row_major.map(|(row, column)| {
-                let index = column * num_rows + row;
-                elements[index].collect()
-                //(row,column,elements[index]).clone()
+    /// Creates a new `Array2` from a Vec<T>.
+    ///
+    /// # Arguments
+    ///
+    /// * `width`: the width of the `Array2`
+    /// * `height`: the height of the `Array2`
+    /// * `values`: A Vec<T>, in row-major order, whose
+    ///             length must be `width` * `height`.
+    pub fn from_row_major(width: usize, height: usize, values: Vec<T>) -> Result<Self, String> {
+        if width * height != values.len() {
+            Err(format!(
+                "Values has {} elements, which is not the product of width {} and height {}",
+                values.len(),
+                width,
+                height,
+            ))
+        } else {
+            Ok(Array2 {
+                width,
+                height,
+                data: values,
             })
-            .collect();
-        Array2 {
-            array,
-            num_rows,
-            num_columns,
         }
     }
-    pub fn get(&self, row: usize, column: usize) -> Option<&T> {
-        self.get_index(row, column).map(|index| &self.array[index])
+
+    /// The height
+    pub fn height(&self) -> usize {
+        self.height
     }
 
-    pub fn map_col_major(coor_vecs: Vec<T>) -> Iterator {
-        let array = from_row_major.map(|(row,column)|
-        let index = column * width + row;
-            (row, column, values[index]))
-    }
-}
-
-trait Iterator for Array2{
-    type Item = <(usize, usize, &T)>;
-    fn next(&mut self) -> option<self::item>;
-}
-
-
-
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    /// The width
+    pub fn width(&self) -> usize {
+        self.width
     }
 
+    /// Returns a reference to the element at the given `column` and `row`
+    /// as long as that index is in bounds
+    /// (wrapped in [`Some`]). Returns [`None`] if out of bounds.
+    pub fn get(&self, c: usize, r: usize) -> Option<&T> {
+        self.get_index(c, r).map(|index| &self.data[index])
+    }
+
+    pub fn get_mut(&mut self, c: usize, r: usize) -> Option<&mut T> {
+        self.get_index(c, r).map(move |index| &mut self.data[index])
+    }
+
+    fn get_index(&self, c: usize, r: usize) -> Option<usize> {
+        if c < self.width && r < self.height {
+            Some(r * self.width + c)
+        } else {
+            None
+        }
+    }
+    ///this takes in an Array2          it will return an vector of iterators of tuples (r,c,value)
+    pub fn iter_row_major(&self) -> impl Iterator<Item = (usize, usize, &T)> {
+        // The compiler knows to optimize away the div-mod ops.
+        self.data
+            .iter()
+            .enumerate()
+            .map(move |(i, v)| (i % self.width, i / self.width, v))
+    }
+
+    pub fn iter_col_major(&self) -> impl Iterator<Item = (usize, usize, &T)> {
+        (0..self.width)
+            // get the start of every column as a fresh iter and keep the index of the column
+            // skip advances the iterator without yielding items
+            .map(move |c| (c, self.data.iter().skip(c)))
+            // do a flat_map for all the columns
+            .flat_map(move |(c, col)| {
+                // for each iterator on a column, step forward by width for the correct next element in that column
+                // step_by yields an item and then advances the iterator
+                col.step_by(self.width)
+                    // enumerate down the columns to get the index of the row
+                    .enumerate()
+                    .map(move |(r, val)| (c, r, val))
+            })
+    }
 }
