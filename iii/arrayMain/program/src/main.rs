@@ -19,13 +19,29 @@ pub fn main() {
             }
         }
     }
-
-    let mut suko = Array2::new_array2(9,9,vec1);
+    let mut sako = Array2::new_array2(9,9,vec1);
+    let mut bako = Array2::iter_col_major(&sako);
+    let mut mac = Array2::new_array2(9,9,&bako);
+    //let mut suko2 =
     //let mut lim = Array2::from_row_major(9,9,vec1);
-    let mut time = Array2::iter_col_major(&suko);
-    let mut ye = Array2::new_array2(9,9,&time);
-    //let bam = suko.get_mut(0,0);
-    println!(ye);
+    //let mut time = Array2::iter_col_major(&suko);
+    //let mut ye = Array2::new_array2(9,9,&time);
+    //print!("{:?}", suko);
+    for suk in bako{
+        println!("{:?}", suk);
+        println!("\n");
+    }
+    //suko.get(0,0);
+    //print!("{:?}", bako);
+    println!("\n");
+    println!("-------------------------------------------------------------------------");
+    println!("\n");
+
+    // for r in 0..9{
+    //     for c in 0..9{
+    //         println!("{:?}", suko.get(r,c));
+    //     }
+    // }
 
 
 
