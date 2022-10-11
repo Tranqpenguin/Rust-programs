@@ -7,6 +7,9 @@
 //     /// The indices (coordinates) were out of bounds.
 //     IndicesOutOfBounds(usize, usize),
 // }
+
+
+
 /// Elements contained must support `Clone`
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub struct Array2<T: Clone> {
@@ -16,12 +19,6 @@ pub struct Array2<T: Clone> {
 }
 
 impl<T: Clone> Array2<T> {
-    pub fn height(&self) -> usize {
-        self.height
-    }
-    pub fn width(&self) -> usize {
-        self.width
-    }
     /// Creates a new `Array2`.
     ///
     /// # Arguments
@@ -64,7 +61,14 @@ impl<T: Clone> Array2<T> {
     }
 
     /// The height
+    pub fn height(&self) -> usize {
+        self.height
+    }
 
+    /// The width
+    pub fn width(&self) -> usize {
+        self.width
+    }
 
     /// Returns a reference to the element at the given `column` and `row`
     /// as long as that index is in bounds
