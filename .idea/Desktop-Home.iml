@@ -9,12 +9,16 @@
       <sourceFolder url="file://$MODULE_DIR$/iii/array2/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/iii/arrayMain/array2/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/iii/arrayMain/program/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/iii/ppmtrans/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/iii/sudoku/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/pnmdata/target" />
       <excludeFolder url="file://$MODULE_DIR$/fgroups/target" />
       <excludeFolder url="file://$MODULE_DIR$/testing/target" />
       <excludeFolder url="file://$MODULE_DIR$/iii/array2/target" />
       <excludeFolder url="file://$MODULE_DIR$/iii/arrayMain/array2/target" />
       <excludeFolder url="file://$MODULE_DIR$/iii/arrayMain/program/target" />
+      <excludeFolder url="file://$MODULE_DIR$/iii/sudoku/target" />
+      <excludeFolder url="file://$MODULE_DIR$/iii/ppmtrans/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
