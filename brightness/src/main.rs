@@ -6,7 +6,7 @@ fn main() {
     let input = env::args().nth(1);
     assert!(env::args().len() == 2);
     let img = GrayImage::read(input.as_deref()).unwrap();
-    let mut denom = img.denominator as u32;
+    let denom = img.denominator as u32;
     let mut sum = 0 as f32;
     let mut counter = 1 as i128;
     for pixel in img.pixels {

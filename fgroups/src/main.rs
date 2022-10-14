@@ -1,32 +1,34 @@
-use std::io::{BufRead, BufReader};
-use std::fs::File;
+use std::io;
+use std::io::BufRead;
+use std::vec::Vec;
+use std::collections::HashMap;
 
-pub fn main() {
-    let mut fp: Vec<char> = Vec::new();
-    let mut names: Vec<char> = Vec::new();
-    let mut content: Vec<char> = Vec::new();
-    let file = BufReader::new(File::open("test.txt").expect("Unable to open file"));
-
-    for line in file.lines() {
-        for ch in line.expect("Unable to read line").chars() {
-            let mut space = ch.is_whitespace();
-            content.push(ch);
-            //println!("Character: {}", ch);
+fn ws(c:char) -> bool{
+    c == ' ' || c == '\t'
+}
+fn main() {
+    let mut fgroups_hashmap: HashMap<String, Vec<String>> = HashMap::new();
+    for line in io::stdin().lock().lines(){
+        let mut line_split = line.as_ref().unwrap().splitn(2,|c:char|ws(c));
+        let fp = line_split.next().unwrap().to_string();
+        let name = line_split.next().unwrap().to_string();
+        match fgroups_hashmap.get_mut(&fp){
+            None =>{
+                fgroups_hashmap.insert(fp.to_string(), vec![name]);
+            }
+            Some(names) => {
+                names.push(name);
+            }
         }
     }
-    
-    println!("--------------------------------------");
-    println!("{:?}", content);
-}
-
-/*
-let mut state = "somthing"
-
-for group in groups{
-    print!("{}", state);
-    for entry in group{
-        print!("{}", entry);
+    let mut current_state = "";
+    for names in fgroups_hashmap.values(){
+        if names.len() >1{
+            println!("{}", current_state);
+            for name in names{
+                println!("{}", name.trim_start());
+            }
+        }
+        current_state = "\n"
     }
-    state = "somthing else";
 }
- */
