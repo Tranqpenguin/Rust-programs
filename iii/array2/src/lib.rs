@@ -5,7 +5,7 @@ use std::borrow::Borrow;
         height: usize,
         data: Vec<T>,
     }
-    impl<T: Clone> Array2<T> {
+impl<T: Clone> Array2<T> {
         // Create a new 2D Array
         pub fn new_array(rows: usize, cols: usize, val: T) -> Self {
             Array2 {
@@ -20,6 +20,15 @@ use std::borrow::Borrow;
             height : rows,
             data : values,
         }
+    }
+
+    pub fn height(&self) -> usize {
+        self.height
+    }
+
+    /// The width
+    pub fn width(&self) -> usize {
+        self.width
     }
     pub fn get(&self, col: usize, row: usize) -> Option<&T> {
         if row >= self.height || col >= self.width{
@@ -37,6 +46,7 @@ use std::borrow::Borrow;
                 col.step_by(self.width).enumerate().map(move |(r, val)| (c, r, val))
             })
     }
+
 }
 
 

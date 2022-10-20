@@ -1,4 +1,4 @@
-use std::env;
+use std::{env, vec};
 use clap::Parser;
 use csc411_image::{GrayImage, Read};
 use array2::Array2;
@@ -25,16 +25,24 @@ fn main() {
     let height : usize = img.height as usize;
     let a2 = Array2::from_row_major(width, height, img.pixels);
 
-    // just checking if i can use pattern properly
-    if pattern == "col"{
-        for a in a2.iter_col_major(){
-            println!("{:?}", a);
+    ///just checking if i can use pattern properly
+    if pattern == "90"{
+        //let mut output = Vec::new();
+        for (col,row,pix) in a2.iter_row_major(){
+            //println!("{} {} {:?}",col,row,pix);
+            //output.push(a2.get(a2.height() - row,a2.width() - col));
+            println!("{:?}", a2.get(a2.height() - col,a2.width() - row));
         }
     }
     else{
         for a in a2.iter_row_major(){
-            println!("{:?}", a);
+            //println!("{:?}", a);
         }
     }
-
+    for (col,row,pix) in a2.iter_row_major(){
+        //println!("{} {} {:?}",col,row,pix);
+    }
+    // println!("{:?}",a2.get(8,8));
 }
+
+
