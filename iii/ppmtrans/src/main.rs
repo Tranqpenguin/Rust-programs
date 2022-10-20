@@ -10,23 +10,22 @@ struct Cli {
     pattern: String,
     /// The path to the file to read
     path: String,
-
+    /// The output file name
     output: String
 }
 
 fn main() {
+    /// This takes all the arguments and put them in their proper member location
     let args = Cli::parse();
+    /// this allows the variable to be seen at an option string from the CLI
     let filename : Option<String> = Some(args.path);
     let pattern = args.pattern;
-    //let pattern = env::args().nth(1);
-    // let filename = env::args().nth(2);
-    // let output = env::args().nth(3);
     let img = GrayImage::read(filename.as_deref()).unwrap();
     let width : usize = img.width as usize;
     let height : usize = img.height as usize;
     let a2 = Array2::from_row_major(width, height, img.pixels);
 
-    //println!("{:?}", pattern);
+    // just checking if i can use pattern properly
     if pattern == "col"{
         for a in a2.iter_col_major(){
             println!("{:?}", a);
