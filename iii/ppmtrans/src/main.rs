@@ -24,26 +24,27 @@ fn main() {
     let width : usize = img.width as usize;
     let height : usize = img.height as usize;
     let a2 = Array2::from_row_major(width, height, img.pixels);
-
+    println!("{}", a2.height());
+    println!("{}", a2.width());
     ///just checking if i can use pattern properly
-    if pattern == "90"{
-        //let mut output = Vec::new();
+    if pattern == "180"{
+        let mut output = Vec::new();
         for (col,row,pix) in a2.iter_row_major(){
-            //println!("{} {} {:?}",col,row,pix);
-            //output.push(a2.get(a2.height() - row,a2.width() - col));
-            //println!("{:?}", a2.get(a2.height() - col,a2.width() - row));
-            println!("col {} row {} pix {:?}", col,row,pix);
+            output.push(a2.get((a2.height() - 1) - col,(a2.width() - 1) - row));
+        }
+        for a in output{
+            println!("{:?}",a);
         }
     }
     else{
-        for a in a2.iter_row_major(){
-            //println!("{:?}", a);
+        let mut output = Vec::new();
+        for (row,col,pix) in a2.iter_row_major(){
+            output.push(a2.get(col,(a2.height() - 1) - row));
+        }
+        for a in output{
+            println!("{:?}",a);
         }
     }
-    for (col,row,pix) in a2.iter_row_major(){
-        //println!("{} {} {:?}",col,row,pix);
-    }
-    // println!("{:?}",a2.get(8,8));
 }
 
 
