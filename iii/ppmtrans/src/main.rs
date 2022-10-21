@@ -31,7 +31,8 @@ fn main() {
         for (col,row,pix) in a2.iter_row_major(){
             //println!("{} {} {:?}",col,row,pix);
             //output.push(a2.get(a2.height() - row,a2.width() - col));
-            println!("{:?}", a2.get(a2.height() - col,a2.width() - row));
+            //println!("{:?}", a2.get(a2.height() - col,a2.width() - row));
+            println!("col {} row {} pix {:?}", col,row,pix);
         }
     }
     else{
