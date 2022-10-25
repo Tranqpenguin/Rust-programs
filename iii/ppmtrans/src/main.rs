@@ -1,6 +1,8 @@
 #![allow(unused)]
 
 mod rotate;
+mod cli;
+
 pub use array2::Array2;
 use csc411_image::{Read,RgbImage,Write};
 use std::env;
