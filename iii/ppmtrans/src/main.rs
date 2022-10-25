@@ -1,20 +1,10 @@
 mod rotate;
-
+mod CLI;
+use crate::CLI::Cli;
 use clap::Parser;
 use csc411_image::{GrayImage, Read};
 use array2::Array2;
 use crate::rotate::{rotate_180, rotate_90};
-
-/// Search for a pattern in a file and display the lines that contain it.
-#[derive(Parser)]
-struct Cli {
-    /// The pattern to look for
-    pattern: String,
-    /// The path to the file to read
-    path: String,
-    /// The output file name
-    output: String
-}
 
 fn main() {
     // This takes all the arguments and put them in their proper member location
