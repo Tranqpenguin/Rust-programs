@@ -1,6 +1,10 @@
+mod rotate;
+
 use clap::Parser;
 use csc411_image::{GrayImage, Read};
 use array2::Array2;
+use crate::rotate::{rotate_180, rotate_90};
+
 /// Search for a pattern in a file and display the lines that contain it.
 #[derive(Parser)]
 struct Cli {
@@ -27,18 +31,14 @@ fn main() {
     //just checking if i can use pattern properly
     if pattern == "rotate180"{
         let mut output = Vec::new();
-        for (col,row,_pix) in a2.iter_row_major(){
-            output.push(a2.get((a2.height() - 1) - col,(a2.width() - 1) - row));
-        }
+        output = rotate_180(&a2).to_vec();
         for a in output{
             println!("{:?}",a);
         }
     }
     else if pattern == "rotate90" {
-        let mut output = Vec::new();
-        for (row,col,_pix) in a2.iter_row_major(){
-            output.push(a2.get(col,(a2.height() - 1) - row));
-        }
+         let mut output = Vec::new();
+        output = rotate_90(&a2).to_vec();
         for a in output{
             println!("{:?}",a);
         }
