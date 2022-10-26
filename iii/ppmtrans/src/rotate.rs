@@ -1,29 +1,28 @@
 use csc411_image::{Read, RgbImage, Write};
 use array2::Array2;
 
-//, image: Array2<csc411_image::Rgb>, row: usize, col: usize, original: Array2<T>
-pub fn rot_0(file_name: Option<&str>,col_maj: bool){
-    let image = RgbImage::read(file_name).unwrap();
-    let row = image.height as usize;
-    let col = image.width as usize;
-    let original = Array2::from_row_major(col,row,image.pixels).unwrap();
-    print_out(original,image.denominator);
+pub fn rotation_0(file_name: Option<&str>,col_maj: bool){
+    let image_input = RgbImage::read(file_name).unwrap();
+    let row = image_input.height as usize;
+    let col = image_input.width as usize;
+    let a2 = Array2::from_row_major(col, row, image_input.pixels).unwrap();
+    print_out(a2, image_input.denominator);
 }
 
-pub fn rot_90(file_name: Option<&str>,col_maj: bool){
-    let image = RgbImage::read(file_name).unwrap();
-    let row = image.height as usize;
-    let col = image.width as usize;
-    let original = Array2::from_row_major(col,row,image.pixels).unwrap();
-    let mut output_img = Array2::new(row,col,csc411_image::Rgb {red: 0, green: 0, blue: 0});
+pub fn rotation_90(file_name: Option<&str>,col_maj: bool){
+    let image_input = RgbImage::read(file_name).unwrap();
+    let row = image_input.height as usize;
+    let col = image_input.width as usize;
+    let a2 = Array2::from_row_major(col, row, image_input.pixels).unwrap();
+    let mut out_image = Array2::new(row, col, csc411_image::Rgb {red: 0, green: 0, blue: 0});
 
 
     if col_maj{
-        for pixel in original.iter_col_major() {
-            let iter_col = pixel.0;
-            let iter_row = pixel.1;
+        for pixel in a2.iter_col_major() {
+            let iterator_col = pixel.0;
+            let iterator_row = pixel.1;
 
-            let mut transform = output_img.get_mut(row - iter_row - 1, iter_col).unwrap();
+            let mut transform = out_image.get_mut(row - iterator_row - 1, iterator_col).unwrap();
 
             transform.red = pixel.2.red;
             transform.green = pixel.2.green;
@@ -31,180 +30,174 @@ pub fn rot_90(file_name: Option<&str>,col_maj: bool){
         }
     }
     else{
-        for pixel in original.iter_row_major() {
+        for pixel in a2.iter_row_major() {
 
-            let iter_col = pixel.0;
-            let iter_row = pixel.1;
-            //println!("{:?} {:?}", row,iter_row);
-            let mut transform = output_img.get_mut(row - iter_row - 1, iter_col).unwrap();
-            //println!("{:?} {:?}", row,iter_row);
+            let iterator_col = pixel.0;
+            let iterator_row = pixel.1;
+            let mut transform = out_image.get_mut(row - iterator_row - 1, iterator_col).unwrap();
             transform.red = pixel.2.red;
             transform.green = pixel.2.green;
             transform.blue = pixel.2.blue;
         }
     }
-    print_out(output_img, image.denominator)
+    print_out(out_image, image_input.denominator)
 }
 
-pub fn rot_180(file_name: Option<&str>,col_maj: bool){
-    let image = RgbImage::read(file_name).unwrap();
-    let row = image.height as usize;
-    let col = image.width as usize;
-    let original = Array2::from_row_major(col,row,image.pixels).unwrap();
+pub fn rotation_180(file_name: Option<&str>,col_maj: bool){
+    let image_input = RgbImage::read(file_name).unwrap();
+    let row = image_input.height as usize;
+    let col = image_input.width as usize;
+    let a2 = Array2::from_row_major(col, row, image_input.pixels).unwrap();
 
     let mut output_img = Array2::new(col,row,csc411_image::Rgb {red: 0, green: 0, blue: 0});
 
     if col_maj{
-        for pixel in original.iter_col_major() {
-            let iter_col = pixel.0;
-            let iter_row = pixel.1;
+        for pixel in a2.iter_col_major() {
+            let iterator_col = pixel.0;
+            let iterator_row = pixel.1;
 
-            let mut transform = output_img.get_mut(col - iter_col - 1, row - iter_row - 1).unwrap();
+            let mut transform = output_img.get_mut(col - iterator_col - 1, row - iterator_row - 1).unwrap();
             transform.red = pixel.2.red;
             transform.green = pixel.2.green;
             transform.blue = pixel.2.blue;
         }
     }
     else{
-        for pixel in original.iter_row_major() {
-            let iter_col = pixel.0;
-            let iter_row = pixel.1;
-            let mut transform = output_img.get_mut(col - iter_col - 1, row - iter_row - 1).unwrap();
+        for pixel in a2.iter_row_major() {
+            let iterator_col = pixel.0;
+            let iterator_row = pixel.1;
+            let mut transform = output_img.get_mut(col - iterator_col - 1, row - iterator_row - 1).unwrap();
             transform.red = pixel.2.red;
             transform.green = pixel.2.green;
             transform.blue = pixel.2.blue;
         }
     }
-    print_out(output_img, image.denominator);
+    print_out(output_img, image_input.denominator);
 }
 
-pub fn rot_270(file_name: Option<&str>,col_maj: bool){
-    let image = RgbImage::read(file_name).unwrap();
-    let row = image.height as usize;
-    let col = image.width as usize;
-    let original = Array2::from_row_major(col,row,image.pixels).unwrap();
+pub fn rotation_270(file_name: Option<&str>,col_maj: bool){
+    let image_input = RgbImage::read(file_name).unwrap();
+    let row = image_input.height as usize;
+    let col = image_input.width as usize;
+    let a2 = Array2::from_row_major(col, row, image_input.pixels).unwrap();
 
 
-    let mut output_img = Array2::new(col,row,csc411_image
-    ::Rgb {red: 0, green: 0, blue: 0});
+    let mut output_img = Array2::new(col,row,csc411_image::Rgb {red: 0, green: 0, blue: 0});
     if col_maj{
-        for pixel in original.iter_col_major() {
-            let iter_col = pixel.0;
-            let iter_row = pixel.1;
-            let mut transform = output_img.get_mut(iter_row, col - iter_col - 1).unwrap();
+        for pixel in a2.iter_col_major() {
+            let iterator_col = pixel.0;
+            let iterator_row = pixel.1;
+            let mut transform = output_img.get_mut(iterator_row, col - iterator_col - 1).unwrap();
             transform.red = pixel.2.red;
             transform.green = pixel.2.green;
             transform.blue = pixel.2.blue;
         }
     }
     else{
-        for pixel in original.iter_row_major() {
-            let iter_col = pixel.0;
-            let iter_row = pixel.1;
-            let mut transform = output_img.get_mut(iter_row, col - iter_col - 1).unwrap();
+        for pixel in a2.iter_row_major() {
+            let iterator_col = pixel.0;
+            let iterator_row = pixel.1;
+            let mut transform = output_img.get_mut(iterator_row, col - iterator_col - 1).unwrap();
             transform.red = pixel.2.red;
             transform.green = pixel.2.green;
             transform.blue = pixel.2.blue;
         }
     }
-    print_out(output_img, image.denominator);
+    print_out(output_img, image_input.denominator);
 }
 
 
-pub fn horiz(file_name: Option<&str>,col_maj: bool){
-    let image = RgbImage::read(file_name).unwrap();
-    let row = image.height as usize;
-    let col = image.width as usize;
-    let original = Array2::from_row_major(col,row,image.pixels).unwrap();
+pub fn horizontal_rotation(file_name: Option<&str>, col_maj: bool){
+    let image_input = RgbImage::read(file_name).unwrap();
+    let row = image_input.height as usize;
+    let col = image_input.width as usize;
+    let a2 = Array2::from_row_major(col, row, image_input.pixels).unwrap();
 
 
-    let mut output_img = Array2::new(col,row,csc411_image
-    ::Rgb {red: 0, green: 0, blue: 0});
+    let mut output_img = Array2::new(col,row,csc411_image::Rgb {red: 0, green: 0, blue: 0});
     if col_maj{
-        for pixel in original.iter_col_major() {
-            let iter_col = pixel.0;
-            let iter_row = pixel.1;
-            let mut transform = output_img.get_mut(col - iter_col - 1, iter_row).unwrap();
+        for pixel in a2.iter_col_major() {
+            let iterator_col = pixel.0;
+            let iterator_row = pixel.1;
+            let mut transform = output_img.get_mut(col - iterator_col - 1, iterator_row).unwrap();
             transform.red = pixel.2.red;
             transform.green = pixel.2.green;
             transform.blue = pixel.2.blue;
         }
     }
     else{
-        for pixel in original.iter_row_major() {
-            let iter_col = pixel.0;
-            let iter_row = pixel.1;
-            let mut transform = output_img.get_mut(col - iter_col - 1, iter_row).unwrap();
+        for pixel in a2.iter_row_major() {
+            let iterator_col = pixel.0;
+            let iterator_row = pixel.1;
+            let mut transform = output_img.get_mut(col - iterator_col - 1, iterator_row).unwrap();
             transform.red = pixel.2.red;
             transform.green = pixel.2.green;
             transform.blue = pixel.2.blue;
         }
     }
-    print_out(output_img, image.denominator);
+    print_out(output_img, image_input.denominator);
 }
 
-pub fn vert(file_name: Option<&str>,col_maj: bool){
-    let image = RgbImage::read(file_name).unwrap();
-    let row = image.height as usize;
-    let col = image.width as usize;
-    let original = Array2::from_row_major(col,row,image.pixels).unwrap();
+pub fn vertical_rotation(file_name: Option<&str>, col_maj: bool){
+    let image_input = RgbImage::read(file_name).unwrap();
+    let row = image_input.height as usize;
+    let col = image_input.width as usize;
+    let a2 = Array2::from_row_major(col, row, image_input.pixels).unwrap();
 
 
-    let mut output_img = Array2::new(col,row,csc411_image
-    ::Rgb {red: 0, green: 0, blue: 0});
+    let mut output_img = Array2::new(col,row,csc411_image::Rgb {red: 0, green: 0, blue: 0});
     if col_maj{
-        for pixel in original.iter_col_major() {
-            let iter_col = pixel.0;
-            let iter_row = pixel.1;
-            let mut transform = output_img.get_mut(iter_col, row - iter_row - 1).unwrap();
+        for pixel in a2.iter_col_major() {
+            let iterator_col = pixel.0;
+            let iterator_row = pixel.1;
+            let mut transform = output_img.get_mut(iterator_col, row - iterator_row - 1).unwrap();
             transform.red = pixel.2.red;
             transform.green = pixel.2.green;
             transform.blue = pixel.2.blue;
         }
     }
     else{
-        for pixel in original.iter_row_major() {
-            let iter_col = pixel.0;
-            let iter_row = pixel.1;
-            let mut transform = output_img.get_mut(iter_col, row - iter_row - 1).unwrap();
+        for pixel in a2.iter_row_major() {
+            let iterator_col = pixel.0;
+            let iterator_row = pixel.1;
+            let mut transform = output_img.get_mut(iterator_col, row - iterator_row - 1).unwrap();
             transform.red = pixel.2.red;
             transform.green = pixel.2.green;
             transform.blue = pixel.2.blue;
         }
     }
-    print_out(output_img, image.denominator);
+    print_out(output_img, image_input.denominator);
 }
 
 pub fn trans(file_name: Option<&str>,col_maj: bool){
-    let image = RgbImage::read(file_name).unwrap();
-    let row = image.height as usize;
-    let col = image.width as usize;
-    let original = Array2::from_row_major(col,row,image.pixels).unwrap();
+    let image_input = RgbImage::read(file_name).unwrap();
+    let row = image_input.height as usize;
+    let col = image_input.width as usize;
+    let a2 = Array2::from_row_major(col, row, image_input.pixels).unwrap();
 
 
-    let mut output_img = Array2::new(col,row,csc411_image
-    ::Rgb {red: 0, green: 0, blue: 0});
+    let mut output_img = Array2::new(col,row,csc411_image::Rgb {red: 0, green: 0, blue: 0});
     if col_maj{
-        for pixel in original.iter_col_major() {
-            let iter_col = pixel.0;
-            let iter_row = pixel.1;
-            let mut transform = output_img.get_mut(iter_row, iter_col).unwrap();
+        for pixel in a2.iter_col_major() {
+            let iterator_col = pixel.0;
+            let iterator_row = pixel.1;
+            let mut transform = output_img.get_mut(iterator_row, iterator_col).unwrap();
             transform.red = pixel.2.red;
             transform.green = pixel.2.green;
             transform.blue = pixel.2.blue;
         }
     }
     else{
-        for pixel in original.iter_row_major() {
-            let iter_col = pixel.0;
-            let iter_row = pixel.1;
-            let mut transform = output_img.get_mut(iter_row, iter_col).unwrap();
+        for pixel in a2.iter_row_major() {
+            let iterator_col = pixel.0;
+            let iterator_row = pixel.1;
+            let mut transform = output_img.get_mut(iterator_row, iterator_col).unwrap();
             transform.red = pixel.2.red;
             transform.green = pixel.2.green;
             transform.blue = pixel.2.blue;
         }
     }
-    print_out(output_img, image.denominator);
+    print_out(output_img, image_input.denominator);
 }
 
 pub fn print_out(img: Array2<csc411_image
