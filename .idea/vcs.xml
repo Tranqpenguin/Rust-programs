@@ -2,8 +2,11 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/diff-lab" vcs="" />
+    <mapping directory="$PROJECT_DIR$/diff-lab/array2" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/iii/array2" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/iii/sudoku" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/locality/array2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ppmdiff/array2" vcs="Git" />
   </component>
 </project>
