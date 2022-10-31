@@ -1,0 +1,1 @@
+C:\Users\Adrian\Documents\Rust\CSC_411\Assignments\Assignment_2\iii\arrayMain\sudoku\target\debug\sudoku.exe: C:\Users\Adrian\Documents\Rust\CSC_411\Assignments\Assignment_2\iii\arrayMain\array2\src\lib.rs C:\Users\Adrian\Documents\Rust\CSC_411\Assignments\Assignment_2\iii\arrayMain\sudoku\src\main.rs
